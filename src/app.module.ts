@@ -7,8 +7,7 @@ import { UsersModule } from './users/users.module';
 import { Users } from './users/entities/users.entitiy';
 @Module({
   imports: [
-    ConfigModule.forRoot(),
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.DB_HOST,
