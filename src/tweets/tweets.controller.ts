@@ -19,6 +19,7 @@ export class TweetsController {
   async createTweet(@Req() req, @Body() createTweetDto: CreateTweetDto) {
     return await this.tweetsService.createTweet(req, createTweetDto);
   }
+
   @Get()
   async getTweets(@Query() query: { page: string }) {
     return await this.tweetsService.getTweets(query);

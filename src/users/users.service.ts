@@ -6,6 +6,7 @@ import { Users } from './entities/users.entitiy';
 import * as bcrypt from 'bcrypt';
 import { LoginDto } from './dtos/login.dto';
 import { JwtService } from '@nestjs/jwt';
+import { Request } from 'express';
 @Injectable()
 export class UsersService {
   constructor(
@@ -16,13 +17,17 @@ export class UsersService {
 
   async createUser(createUserDto) {
     const hashedPassword = await bcrypt.hash(createUserDto.password, 10);
+
     const user = await this.usersRepository.save({
       email: createUserDto.email,
       nickname: createUserDto.nickname,
       password: hashedPassword,
     });
 
-    return { email: user.email, nickname: user.nickname };
+    // return { email: user.email, nickname: user.nickname };
+
+    const token = this.jwtService.sign({ id: user.id });
+    return { token };
   }
 
   async login(loginDto: LoginDto) {
@@ -53,5 +58,10 @@ export class UsersService {
 
     const token = this.jwtService.sign({ id: user.id });
     return { token };
+  }
+
+  async getMe(req: Request): Promise<number> {
+    // return { userId: req.user };
+    return +req.user;
   }
 }
