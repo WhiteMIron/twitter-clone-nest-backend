@@ -8,6 +8,8 @@ import { Users } from './users/entities/users.entitiy';
 import { TweetsModule } from './tweets/tweets.module';
 import { Tweets } from './tweets/entities/tweets.entity';
 import { AuthModule } from './auth/auth.module';
+import { LikesModule } from './likes/likes.module';
+import { Likes } from './likes/entities/likes.entitiy';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -18,7 +20,7 @@ import { AuthModule } from './auth/auth.module';
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_DATABASE,
-      entities: [Users, Tweets],
+      entities: [Users, Tweets, Likes],
       synchronize: true,
       logging: true,
       // keepConnectionAlive: true
@@ -26,6 +28,7 @@ import { AuthModule } from './auth/auth.module';
     UsersModule,
     TweetsModule,
     AuthModule,
+    LikesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -1,6 +1,7 @@
 import { Common } from 'src/common/entities/common.entitiy';
+import { Likes } from 'src/likes/entities/likes.entitiy';
 import { Users } from 'src/users/entities/users.entitiy';
-import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 
 @Entity()
 export class Tweets extends Common {
@@ -13,4 +14,7 @@ export class Tweets extends Common {
   })
   @JoinColumn()
   users: Users;
+
+  @OneToMany(() => Likes, (likes) => likes.tweet)
+  likes: Likes[];
 }
