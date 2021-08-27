@@ -14,7 +14,10 @@ export class Likes extends Common {
   @Column('boolean', { default: true })
   like: boolean;
 
-  @ManyToOne(() => Users, (users) => users.likes)
+  @ManyToOne(() => Users, (users) => users.likes, {
+    onDelete: 'SET NULL',
+    onUpdate: 'CASCADE',
+  })
   @JoinColumn()
   user: Users;
 

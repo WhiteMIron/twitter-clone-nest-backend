@@ -36,11 +36,14 @@ export class LikesService {
   }
 
   async getTweetLikeCount(param: { tweetsId: string }) {
-    return await this.likesRepository.count({
+    const like = await this.likesRepository.count({
       where: {
         tweet: { id: param.tweetsId },
+        like: true,
       },
     });
+    console.log('like:', like);
+    return like;
   }
 
   async getTweetIsLike(req: Request, param: { tweetsId: string }) {
